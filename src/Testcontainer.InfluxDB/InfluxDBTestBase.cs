@@ -12,7 +12,7 @@ namespace Testcontainer.InfluxDB
         protected const string AdminToken = "my-super-secret-admin-token";
 
         protected TestcontainersContainer TestContainer { get; private set; } = null!;
-        protected InfluxDBClient InfluxDbClient { get; private set; } = null!;
+        protected InfluxDBClient InfluxDBClient { get; private set; } = null!;
         protected Bucket DefaultBucket { get; private set; } = null!;
         protected ushort Port { get; private set; }
 
@@ -48,17 +48,11 @@ namespace Testcontainer.InfluxDB
                 .Org("Org")
                 .AuthenticateToken(AdminToken);
 
-            InfluxDbClient = new InfluxDBClient(optionsBuilder.Build());
+            InfluxDBClient = new InfluxDBClient(optionsBuilder.Build());
 
-            for (int i = 0; i < 100; i++)
-            {
-                var alive = await InfluxDbClient.PingAsync();
-                if (alive)
-                    break;
-                await Task.Delay(100);
-            }
+            await WaitForServiceRunning(InfluxDBClient);
 
-            var bucketsApi = InfluxDbClient.GetBucketsApi();
+            var bucketsApi = InfluxDBClient.GetBucketsApi();
 
             DefaultBucket = await bucketsApi.FindBucketByNameAsync("Bucket");
 
@@ -67,8 +61,22 @@ namespace Testcontainer.InfluxDB
 
         async Task IAsyncLifetime.DisposeAsync()
         {
-            InfluxDbClient.Dispose();
+            InfluxDBClient.Dispose();
+
             await TestContainer.DisposeAsync();
+        }
+
+        private static async Task WaitForServiceRunning(InfluxDBClient client)
+        {
+            for (var i = 0; i < 100; i++)
+            {
+                if (await client.PingAsync())
+                    return;
+
+                await Task.Delay(100);
+            }
+
+            Assert.Fail("Timeout waiting for service to respond.");
         }
     }
 }

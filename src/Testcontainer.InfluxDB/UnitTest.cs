@@ -12,7 +12,7 @@ namespace Testcontainer.InfluxDB
         [Fact]
         public async Task PointsCanBeWrittenAndQueried()
         {
-            var influxDbClient = InfluxDbClient;
+            var influxDbClient = InfluxDBClient;
             var bucket = DefaultBucket;
             var now = DateTime.UtcNow;
 
