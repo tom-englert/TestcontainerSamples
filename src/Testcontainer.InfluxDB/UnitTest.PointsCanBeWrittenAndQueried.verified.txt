@@ -1,17 +1,17 @@
-﻿[
+[
   {
     Time: DateTime_1,
     Field: field1,
     Value: Data 1 1,
     Tag1: 1,
-    Tag2: 2
+    Tag2: Tag.Test.2
   },
   {
     Time: DateTime_1,
     Field: field2,
     Value: Data 2 1,
     Tag1: 1,
-    Tag2: 2
+    Tag2: Tag.Test.2
   },
   {
     Time: DateTime_2,
@@ -19,7 +19,7 @@
     Field: field1,
     Value: Data 1 2,
     Tag1: 2,
-    Tag2: 3
+    Tag2: Tag.Test.3
   },
   {
     Time: DateTime_2,
@@ -27,7 +27,7 @@
     Field: field2,
     Value: Data 2 2,
     Tag1: 2,
-    Tag2: 3
+    Tag2: Tag.Test.3
   },
   {
     Time: DateTime_3,
@@ -35,7 +35,7 @@
     Field: field1,
     Value: Data 1 3,
     Tag1: 3,
-    Tag2: 4
+    Tag2: Tag.Test.4
   },
   {
     Time: DateTime_3,
@@ -43,7 +43,7 @@
     Field: field2,
     Value: Data 2 3,
     Tag1: 3,
-    Tag2: 4
+    Tag2: Tag.Test.4
   },
   {
     Time: DateTime_4,
@@ -51,7 +51,7 @@
     Field: field1,
     Value: Data 1 4,
     Tag1: 4,
-    Tag2: 5
+    Tag2: Tag.Test.5
   },
   {
     Time: DateTime_4,
@@ -59,7 +59,7 @@
     Field: field2,
     Value: Data 2 4,
     Tag1: 4,
-    Tag2: 5
+    Tag2: Tag.Test.5
   },
   {
     Time: DateTime_5,
@@ -67,7 +67,7 @@
     Field: field1,
     Value: Data 1 5,
     Tag1: 5,
-    Tag2: 6
+    Tag2: Tag.Test.6
   },
   {
     Time: DateTime_5,
@@ -75,6 +75,6 @@
     Field: field2,
     Value: Data 2 5,
     Tag1: 5,
-    Tag2: 6
+    Tag2: Tag.Test.6
   }
 ]

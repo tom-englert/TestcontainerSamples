@@ -2,9 +2,11 @@
 using DotNet.Testcontainers.Containers;
 using InfluxDB.Client;
 using InfluxDB.Client.Api.Domain;
+using JetBrains.Annotations;
 
 namespace Testcontainer.InfluxDB
 {
+    [PublicAPI]
     public abstract class InfluxDBTestBase : IAsyncLifetime
     {
         protected const string AdminToken = "my-super-secret-admin-token";

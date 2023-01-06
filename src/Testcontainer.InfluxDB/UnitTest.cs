@@ -2,6 +2,7 @@ using System.Text;
 using InfluxDB.Client.Api.Domain;
 using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Writes;
+using JetBrains.Annotations;
 
 namespace Testcontainer.InfluxDB
 {
@@ -17,10 +18,10 @@ namespace Testcontainer.InfluxDB
 
             var points = Enumerable.Range(1, 5)
                 .Select(i => PointData.Builder.Measurement("syslog")
-                    .Tag("tag1", $"{i}")
-                    .Tag("tag2", $"{i + 1}")
-                    .Field("field1", $"Data 1 {i}")
-                    .Field("field2", $"Data 2 {i}")
+                    .Tag("tag1", $@"{i}")
+                    .Tag("tag2", $@"Tag.Test.{i + 1}")
+                    .Field("field1", $@"Data 1 {i}")
+                    .Field("field2", $@"Data 2 {i}")
                     .Timestamp(now + TimeSpan.FromMilliseconds(i), WritePrecision.Ms)
                     .ToPointData())
                 .ToList();
@@ -39,13 +40,14 @@ namespace Testcontainer.InfluxDB
                 result.Add(new QueryResult(record));
             });
 
-            await Verify(result);
-
-            //Console.WriteLine($"... Port: {port}");
+            //Console.WriteLine($"... Port: {Port}");
             //Console.ReadKey();
+
+            await Verify(result);
         }
 
-        class QueryResult
+        [PublicAPI]
+        private class QueryResult
         {
             public QueryResult(FluxRecord record)
             {
