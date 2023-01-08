@@ -1,8 +1,6 @@
 using System.Text;
 using InfluxDB.Client.Api.Domain;
-using InfluxDB.Client.Core.Flux.Domain;
 using InfluxDB.Client.Writes;
-using JetBrains.Annotations;
 
 namespace Testcontainer.InfluxDB
 {
@@ -44,29 +42,6 @@ namespace Testcontainer.InfluxDB
             //Console.ReadKey();
 
             await Verify(result);
-        }
-
-        [PublicAPI]
-        private class QueryResult
-        {
-            public QueryResult(FluxRecord record)
-            {
-                Table = record.Table;
-                var values = record.Values;
-
-                Time = ((NodaTime.Instant)values["_time"]).ToDateTimeUtc();
-                Field = (string)values["_field"];
-                Value = values["_value"];
-                Tag1 = (string)values["tag1"];
-                Tag2 = (string)values["tag2"];
-            }
-
-            public DateTime Time { get; }
-            public int Table { get; }
-            public string Field { get; }
-            public object Value { get; }
-            public string Tag1 { get; }
-            public string Tag2 { get; }
         }
     }
 }
